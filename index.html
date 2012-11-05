@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>mu test</title>
+
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta http-equiv="Content-Language" content="en-us" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+
+		<!--<link rel="stylesheet" type="text/css" href="css/normalize.css">-->
+		<link rel="stylesheet/less" type="text/css" href="css/style.less">
+
+		<script type="text/javascript" charset="utf-8" src="jquery-1.8.2.min.js"></script>
+
+		<style type="text/css">
+			@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
+			html, body {
+				font-family: "Droid Sans";
+			}
+			#main {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 9999px;
+				height: 9999px;
+			}
+
+			span {
+				padding: 0;
+				margin: 0;
+			}
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				var sizes = [6,7,8,9,10,11,12,14,16,18,21,24,36,48,60,72];
+				var mu = [];
+				var text = 'Grumpy wizards make toxic brew for the evil Queen and Jack';
+				var cpl = text.length;
+
+				for (var i = 0; i < sizes.length; i++) {
+					var size = sizes[i];
+					var span = $('<span></span>').appendTo('#main');
+					span.css('font-size', size + 'pt');
+					span.text(text);
+					$('<br/>').insertAfter(span);
+
+					var width = span.width();
+					size = size * (96/72); //convert to px
+					mu.push((cpl * size) / width);
+				}
+
+				console.log(mu);
+
+				var avgMu = 0;
+				for (var i = 0; i < mu.length; i++) {
+					avgMu += mu[i];
+				}
+
+				console.log('average', (avgMu / mu.length).toFixed(2));
+			});
+		</script>
+	</head>
+	<body>
+		<div id="main"></div>
+	</body>
+</html>
